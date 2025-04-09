@@ -1,27 +1,29 @@
-# Étape 1 : Installer les dépendances de développement
-FROM node:20-bullseye-slim AS development-dependencies-env
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --no-cache
+# Étape 1 : Utiliser une image Node.js pour construire l'application
+FROM node:18 AS build
 
-# Étape 2 : Installer les dépendances de production
-FROM node:20-bullseye-slim AS production-dependencies-env
+# Définir le répertoire de travail
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --no-cache --omit=dev
 
-# Étape 3 : Construire l'application
-FROM node:20-bullseye-slim AS build-env
-WORKDIR /app
+# Copier les fichiers package.json et package-lock.json
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm install
+
+# Copier tout le code source dans le conteneur
 COPY . .
-COPY --from=development-dependencies-env /app/node_modules ./node_modules
+
+# Construire l'application pour la production
 RUN npm run build
 
-# Étape 4 : Image finale pour exécuter l'application
-FROM node:20-bullseye-slim
-WORKDIR /app
-COPY package.json package-lock.json ./
-COPY --from=production-dependencies-env /app/node_modules ./node_modules
-COPY --from=build-env /app/build ./build
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+# Étape 2 : Utiliser une image Nginx pour servir l'application
+FROM nginx:alpine
+
+# Copier les fichiers construits dans le dossier Nginx
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Exposer le port 80
+EXPOSE 80
+
+# Commande par défaut pour démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
