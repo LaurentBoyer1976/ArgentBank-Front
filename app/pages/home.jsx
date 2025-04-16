@@ -6,7 +6,7 @@ import Features from "../components/features";
 
  const Home = () => {
     return (
-        <main >
+        <main>
             <Banner/>
             <Features />
         </main>

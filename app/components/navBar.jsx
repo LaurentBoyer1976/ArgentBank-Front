@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import argentBankLogo from "../../../Bank-API/designs/img/argentBankLogo.png";
+import argentBankLogo from "../../public/designs/img/argentBankLogo.png";
 
 const NavBar = () => {
     return (
@@ -28,3 +28,4 @@ NavBar.propTypes = {
     logo: PropTypes.string,
     altText: PropTypes.string,
 };
+export default NavBar;

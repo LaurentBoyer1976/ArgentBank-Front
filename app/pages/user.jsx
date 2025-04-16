@@ -20,3 +20,10 @@ const User = (data) => {
         </main>
     );
 }
+User.propTypes = {
+    title: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+};
+export default User;
