@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "../layouts/layout";
 import Home from "../pages/home";
 import Login from "../pages/login";
-import User from "../pages/user";
-import "../styles/main.css";
+import Profile from "../pages/profile";
+import "../../public/designs/css/main.css";
+
+console.log("AppRouter is rendering"); // Vérification
 
 const AppRouter = () => {
   return (
