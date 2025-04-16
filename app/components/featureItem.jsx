@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const FeatureItem = ({ icon, title, description }) => {
+  const iconPath = `/app/assets/img/${icon}`; // Adjust the path as necessary
   return (
     <div className="feature-item">
       <img
-        src={icon}
+        src={iconPath}
         alt={`Icon of ${title}`}
         className="feature-icon"
       />
