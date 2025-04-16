@@ -4,7 +4,7 @@ import Layout from "../layouts/layout";
 import Home from "../pages/home";
 import Login from "../pages/login";
 import User from "../pages/user";
-import "../../public/designs/css/main.css";
+
 
 console.log("AppRouter is rendering"); // Vérification
 

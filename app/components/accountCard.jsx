@@ -15,7 +15,7 @@ const AccountCard = (data) => {
       </section>
     );
 }
-accountCard.propTypes = {
+AccountCard.propTypes = {
     title: propTypes.string.isRequired,
     amount: propTypes.string.isRequired,
     description: propTypes.string.isRequired,

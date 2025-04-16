@@ -12,7 +12,7 @@ const MainHeader = (data) => {
 
     const handleSaveClick = async () => {
         try {
-            // Replace with your API call to update the user in the database
+            // Info: Replace with your API call to update the user in the database
             await fetch('/api/updateUser', {
                 method: 'POST',
                 headers: {

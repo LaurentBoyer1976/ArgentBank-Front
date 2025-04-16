@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Account from "../components/account";
 import MainHeader from "../components/mainHeader";
 
