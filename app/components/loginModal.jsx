@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser, fetchUserProfile } from "../api/services/userAuthentification";
 
 const LoginModal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [userData, setUserData] = useState(null); // État pour stocker les données utilisateur
 
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await loginUser(email, password);
       const userProfile = await fetchUserProfile();
+      setUserData(userProfile.body); // Stocker les données utilisateur dans le state ou le contexte
+      navigate('/user'); // Rediriger vers la page d'accueil après la connexion
       console.log('User Profile:', userProfile.body); // Affiche les données utilisateur
     } catch (err) {
       setError(err.message);
