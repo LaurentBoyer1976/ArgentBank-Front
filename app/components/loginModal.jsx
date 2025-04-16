@@ -1,32 +1,59 @@
-import React from "react";
-
-console.log("LoginModal component loaded"); // Debugging line to check if the component is loaded
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginUser, fetchUserProfile } from "../api/services/userAuthentification";
 
 const LoginModal = () => {
-    return (
-<section className="sign-in-content">
-    <i className="fa fa-user-circle sign-in-icon"></i>
-    <h1>Sign In</h1>
-    <form>
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [userData, setUserData] = useState(null); // État pour stocker les données utilisateur
+
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await loginUser(email, password);
+      const userProfile = await fetchUserProfile();
+      setUserData(userProfile.body); // Stocker les données utilisateur dans le state ou le contexte
+      navigate('/user'); // Rediriger vers la page d'accueil après la connexion
+      console.log('User Profile:', userProfile.body); // Affiche les données utilisateur
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <section className="sign-in-content">
+      <i className="fa fa-user-circle sign-in-icon"></i>
+      <h1>Sign In</h1>
+      <form onSubmit={handleLogin}>
         <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+          <label htmlFor="username">Email</label>
+          <input
+            type="email"
+            id="username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
+          <input type="checkbox" id="remember-me" />
+          <label htmlFor="remember-me">Remember me</label>
         </div>
-        {/* Replacing the placeholder link with a button */}
+        {error && <p className="error-message">{error}</p>}
         <button type="submit" className="sign-in-button">Sign In</button>
-    </form>
-</section>
-    );
-}
-
+      </form>
+    </section>
+  );
+};
 
 export default LoginModal;
