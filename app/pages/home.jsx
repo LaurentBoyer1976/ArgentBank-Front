@@ -1,21 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import Banner from "../components/banner";
 import Features from "../components/features";
+import { fetchFeatures } from "../api/services/api";
 
+const Home = () => {
+  const [featuresData, setFeaturesData] = useState([]);
 
- const Home = () => {
-    return (
-        <main >
-            <Banner/>
-            <Features />
-        </main>
-    );
- }
+  useEffect(() => {
+    const getFeatures = async () => {
+      const data = await fetchFeatures();
+      setFeaturesData(data);
+    };
 
-Home.propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    getFeatures();
+  }, []);
+
+  return (
+    <main className="main">
+      <Banner />
+      <Features datas={featuresData} />
+    </main>
+  );
 };
+
 export default Home;

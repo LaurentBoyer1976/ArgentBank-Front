@@ -18,3 +18,10 @@ const Account = (datas) => {
         </>
     );
 }
+
+Account.propTypes = {
+    title: propTypes.string.isRequired,
+    amount: propTypes.string.isRequired,
+    description: propTypes.string.isRequired,
+};
+export default Account;

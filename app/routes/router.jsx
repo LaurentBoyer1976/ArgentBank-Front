@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "../layouts/layout";
 import Home from "../pages/home";
 import Login from "../pages/login";
-import Profile from "../pages/profile";
-import "../../public/designs/css/main.css";
+import User from "../pages/user";
 
-console.log("AppRouter is rendering"); // Vérification
+
 
 const AppRouter = () => {
   return (
@@ -15,7 +14,7 @@ const AppRouter = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<User />} />
         </Route>
       </Routes>
     </Router>
