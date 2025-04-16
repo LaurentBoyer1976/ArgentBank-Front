@@ -1,10 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const MainHeader = (data) => {
-    const [isEditing, setIsEditing] = React.useState(false);
-    const [firstName, setFirstName] = React.useState(data.user.firstName);
-    const [lastName, setLastName] = React.useState(data.user.lastName);
+const MainHeader = ({ user, onUpdateUser }) => {
+    console.log("user", user); // Vérifiez si `user` est bien passé en prop
+    const [isEditing, setIsEditing] = useState(false);
+    const [firstName, setFirstName] = useState(user?.firstName || ""); // Utilisez `?.` pour éviter les erreurs
+    const [lastName, setLastName] = useState(user?.lastName || "");
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -12,19 +13,17 @@ const MainHeader = (data) => {
 
     const handleSaveClick = async () => {
         try {
-            // Info: Replace with your API call to update the user in the database
-            await fetch('/api/updateUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ firstName, lastName }),
-            });
+            // Appelle la fonction passée en prop pour mettre à jour l'utilisateur
+            await onUpdateUser({ firstName, lastName });
             setIsEditing(false);
         } catch (error) {
-            console.error('Error updating user:', error);
+            console.error("Error updating user:", error);
         }
     };
+
+    if (!user) {
+        return <p>Loading user data...</p>; // Affiche un message de chargement si `user` est `undefined`
+    }
 
     return (
         <header className="header">
@@ -34,11 +33,13 @@ const MainHeader = (data) => {
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="First Name"
                     />
                     <input
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        placeholder="Last Name"
                     />
                     <button className="save-button" onClick={handleSaveClick}>
                         Save
@@ -56,14 +57,14 @@ const MainHeader = (data) => {
             )}
         </header>
     );
-
-}
+};
 
 MainHeader.propTypes = {
-    user: propTypes.shape({
-        firstName: propTypes.string.isRequired,
-        lastName: propTypes.string.isRequired,
-    }).isRequired,
+    user: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+    }),
+    onUpdateUser: PropTypes.func.isRequired, // Fonction pour mettre à jour l'utilisateur
 };
 
 export default MainHeader;
