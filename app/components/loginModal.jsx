@@ -1,7 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+console.log("LoginModal component loaded"); // Debugging line to check if the component is loaded
+
 
 const LoginModal = () => {
+    return (
 <section className="sign-in-content">
     <i className="fa fa-user-circle sign-in-icon"></i>
     <h1>Sign In</h1>
@@ -22,9 +25,8 @@ const LoginModal = () => {
         <button type="submit" className="sign-in-button">Sign In</button>
     </form>
 </section>
+    );
 }
-LoginModal.propTypes = {
-    username: PropTypes.string,
-    password: PropTypes.string,
-};
+
+
 export default LoginModal;
