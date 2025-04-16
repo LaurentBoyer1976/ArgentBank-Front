@@ -6,7 +6,6 @@ import Login from "../pages/login";
 import User from "../pages/user";
 
 
-console.log("AppRouter is rendering"); // Vérification
 
 const AppRouter = () => {
   return (
