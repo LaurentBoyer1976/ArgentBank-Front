@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainHeader from "../components/mainHeader";
 import Account from "../components/account";
 import { fetchUserAccounts } from "../store/accountSlice";
 import { formatAccounts } from "../utils/formatData";
+import { openEditModal, closeEditModal } from "../store/userSlice"; // Import des actions Redux
 
 const User = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const accounts = useSelector((state) => state.accounts);
-
-  const [isEditing, setIsEditing] = useState(false); // État pour contrôler la modale
 
   console.log("User data from Redux:", user);
   console.log("Accounts data from Redux:", accounts);
@@ -46,9 +45,9 @@ const User = () => {
   return (
     <main className="main bg-dark">
       <MainHeader
-        onUpdateUser={() => setIsEditing(true)} // Ouvre la modale
-        isEditing={isEditing} // Passe l'état de la modale
-        onCloseModal={() => setIsEditing(false)} // Ferme la modale
+        onUpdateUser={() => dispatch(openEditModal())} // Ouvre la modale via Redux
+        isEditing={user.isEditing} // Passe l'état de la modale depuis Redux
+        onCloseModal={() => dispatch(closeEditModal())} // Ferme la modale via Redux
       />
       <Account accounts={formattedAccounts} />
     </main>

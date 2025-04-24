@@ -36,6 +36,12 @@ const userSlice = createSlice({
       state.status = "idle";
       state.error = null;
     },
+    openEditModal: (state) => {
+      state.isEditing = true; // Ouvre la modale d'édition
+    },
+    closeEditModal: (state) => {
+      state.isEditing = false; // Ferme la modale d'édition
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,5 +61,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, clearUser } = userSlice.actions;
+export const { setToken, clearUser, openEditModal, closeEditModal } = userSlice.actions;
 export default userSlice.reducer;
