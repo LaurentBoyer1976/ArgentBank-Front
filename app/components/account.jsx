@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import AccountCard from "./accountCard";
 
 const Account = ({ accounts }) => {
-  console.log("Accounts passed to AccountCard:", accounts);
-
   return (
     <>
       <h2 className="sr-only">Accounts</h2>

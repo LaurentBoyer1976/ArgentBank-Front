@@ -13,7 +13,6 @@ export const fetchUserAccounts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetchAccounts(); // Appel de l'API
-     console.log("API Response (Accounts):", response.body); // Log des données brutes de l'API
       return response.body.map((account) => ({
         id: account._id, // Renomme `_id` en `id`
         title: account.title,
@@ -36,8 +35,7 @@ const accountSlice = createSlice({
       .addCase(fetchUserAccounts.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchUserAccounts.fulfilled, (state, action) => {
-        console.log("Accounts updated in Redux Store:", action.payload); // Log des données mises à jour
+      .addCase(fetchUserAccounts.fulfilled, (state, action) => {       
         state.status = "succeeded";
         state.accounts = action.payload;
       })

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const AccountCard = ({ title, amount, description }) => {
-  console.log("AccountCard props:", { title, amount, description });
 
   return (
     <section className="account">

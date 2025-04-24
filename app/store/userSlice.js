@@ -48,8 +48,7 @@ const userSlice = createSlice({
       .addCase(fetchUserData.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchUserData.fulfilled, (state, action) => {
-        console.log("User data updated in Redux Store:", action.payload); // Log des données utilisateur
+      .addCase(fetchUserData.fulfilled, (state, action) => {       
         state.status = "succeeded";
         state.firstName = action.payload.firstName;
         state.name = action.payload.lastName; // Vérifiez que `lastName` est bien défini
