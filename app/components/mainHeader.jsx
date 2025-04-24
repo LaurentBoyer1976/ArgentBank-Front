@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import EditUserNameModal from "./editUserNameModal";
 
 const MainHeader = ({ user, onUpdateUser }) => {
-    console.log("user", user); // Vérifiez si `user` est bien passé en prop
-    const [isEditing, setIsEditing] = useState(false);
-    const [firstName, setFirstName] = useState(user?.firstName || ""); // Utilisez `?.` pour éviter les erreurs
-    const [lastName, setLastName] = useState(user?.lastName || "");
+    const [isEditing, setIsEditing] = useState(false); // Contrôle l'affichage de la modale
 
     const handleEditClick = () => {
-        setIsEditing(true);
+        setIsEditing(true); // Affiche la modale
     };
 
-    const handleSaveClick = async () => {
-        try {
-            // Appelle la fonction passée en prop pour mettre à jour l'utilisateur
-            await onUpdateUser({ firstName, lastName });
-            setIsEditing(false);
-        } catch (error) {
-            console.error("Error updating user:", error);
-        }
+    const handleCloseModal = () => {
+        setIsEditing(false); // Ferme la modale
     };
 
     if (!user) {
@@ -28,27 +20,12 @@ const MainHeader = ({ user, onUpdateUser }) => {
     return (
         <header className="header">
             {isEditing ? (
-                <div>
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="First Name"
-                    />
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Last Name"
-                    />
-                    <button className="save-button" onClick={handleSaveClick}>
-                        Save
-                    </button>
-                </div>
+                // Affiche la modale si `isEditing` est vrai
+                <EditUserNameModal onClose={handleCloseModal} />
             ) : (
                 <div>
                     <h1>
-                        Welcome back<br />{firstName} {lastName}!
+                        Welcome back<br />{user.firstName} {user.lastName}!
                     </h1>
                     <button className="edit-button" onClick={handleEditClick}>
                         Edit Name

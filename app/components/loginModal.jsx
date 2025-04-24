@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser, fetchUserProfile } from "../api/services/userAuthentification";
+import { useDispatch } from "react-redux";
+import { setToken, fetchUserData } from "../store/userSlice";
+import { loginUser } from "../api/services/userAuthentification";
 
 const LoginModal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [userData, setUserData] = useState(null); // État pour stocker les données utilisateur
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(email, password);
-      const userProfile = await fetchUserProfile();
-      setUserData(userProfile.body); // Stocker les données utilisateur dans le state ou le contexte
-      navigate('/user'); // Rediriger vers la page d'accueil après la connexion
-      console.log('User Profile:', userProfile.body); // Affiche les données utilisateur
+      const token = await loginUser(email, password); // Appel API pour se connecter
+      console.log("Token after login:", token);
+      dispatch(setToken(token)); // Stocker le token dans le store
+      localStorage.setItem("token", token); // Stocker le token dans localStorage
+
+      // Récupérer les données utilisateur et les stocker dans le store
+      await dispatch(fetchUserData());
+
+      navigate('/user'); // Rediriger vers la page utilisateur
     } catch (err) {
       setError(err.message);
     }

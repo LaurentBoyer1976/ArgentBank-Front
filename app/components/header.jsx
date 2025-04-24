@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../store/userSlice";
 import NavBar from "./navBar";
 
 const Header = () => {
-    const [user, setUser] = useState(null); // État pour stocker les informations de l'utilisateur
-
-    useEffect(() => {
-        // Simulez la récupération des données utilisateur (par exemple, depuis un token JWT ou une API)
-        const token = localStorage.getItem("token");
-        if (token) {
-            // Exemple de données utilisateur récupérées
-            const userData = { firstName: "Tony", lastName: "Stark" };
-            setUser(userData);
-        }
-    }, []);
+    const dispatch = useDispatch();
 
     const handleSignOut = () => {
         // Supprimez le token JWT du localStorage
         localStorage.removeItem("token");
-        // Réinitialisez l'état utilisateur
-        setUser(null);
+        // Réinitialisez l'état utilisateur dans Redux
+        dispatch(clearUser());
         // Redirigez vers la page d'accueil ou de connexion
         window.location.href = "/";
     };
 
     return (
         <header className="header">
-            <NavBar user={user} onSignOut={handleSignOut} />
+            <NavBar onSignOut={handleSignOut} />
         </header>
     );
 };

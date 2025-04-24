@@ -175,6 +175,9 @@ body, #root {
   margin-top: 3rem;
   padding: 2rem;
 }
+header .sign-in-content{
+  color: #2c3e50;
+}
 
 .sign-in-icon {
   font-size: 5rem;
