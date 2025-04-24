@@ -23,7 +23,7 @@ const MainHeader = ({ onUpdateUser }) => {
 
   return (
     <header className="header">
-      <h1>Welcome back!</h1>
+      <h1>Welcome back</h1>
       <UserName firstName={user.firstName} name={user.name} />
       <button className="edit-button" onClick={handleEditClick}>
         Edit Name

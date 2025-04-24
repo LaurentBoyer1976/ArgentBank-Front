@@ -8,7 +8,7 @@ const UserName = ({ firstName, name }) => {
         <h2>{firstName}</h2>
       </div>
       <div className="user-lastname">
-        <h2>{name}</h2>
+        <h2>{name}!</h2>
       </div>
     </div>
   );

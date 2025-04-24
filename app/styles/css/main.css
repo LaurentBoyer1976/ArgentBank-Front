@@ -268,6 +268,16 @@ header .sign-in-content{
   color: #fff;
   margin-bottom: 2rem;
 }
+.header h1 {
+
+  margin: 20px 0 0 0; 
+
+}
+.user-name {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.9rem;
+}
 
 .transaction-button {
   display: block;
