@@ -1,70 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import UserName from "./userName";
+import EditUserNameModal from "./editUserNameModal"; // Import de la modale
 
-const MainHeader = ({ user, onUpdateUser }) => {
-    console.log("user", user); // Vérifiez si `user` est bien passé en prop
-    const [isEditing, setIsEditing] = useState(false);
-    const [firstName, setFirstName] = useState(user?.firstName || ""); // Utilisez `?.` pour éviter les erreurs
-    const [lastName, setLastName] = useState(user?.lastName || "");
+const MainHeader = ({ onUpdateUser, isEditing, onCloseModal }) => {
+  const user = useSelector((state) => state.user);
 
-    const handleEditClick = () => {
-        setIsEditing(true);
-    };
 
-    const handleSaveClick = async () => {
-        try {
-            // Appelle la fonction passée en prop pour mettre à jour l'utilisateur
-            await onUpdateUser({ firstName, lastName });
-            setIsEditing(false);
-        } catch (error) {
-            console.error("Error updating user:", error);
-        }
-    };
+  if (!user.firstName || !user.name) {
+    return <p>Loading user data...</p>;
+  }
 
-    if (!user) {
-        return <p>Loading user data...</p>; // Affiche un message de chargement si `user` est `undefined`
-    }
-
-    return (
-        <header className="header">
-            {isEditing ? (
-                <div>
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="First Name"
-                    />
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Last Name"
-                    />
-                    <button className="save-button" onClick={handleSaveClick}>
-                        Save
-                    </button>
-                </div>
-            ) : (
-                <div>
-                    <h1>
-                        Welcome back<br />{firstName} {lastName}!
-                    </h1>
-                    <button className="edit-button" onClick={handleEditClick}>
-                        Edit Name
-                    </button>
-                </div>
-            )}
-        </header>
-    );
+  return (
+    <header className="header">
+      {isEditing ? (
+        <EditUserNameModal onClose={onCloseModal} /> // Affiche la modale si `isEditing` est vrai
+      ) : (
+        <>
+          <h1>Welcome back</h1>
+          <UserName firstName={user.firstName} name={user.name} />
+          <button className="edit-button" onClick={onUpdateUser}>
+            Edit Name
+          </button>
+        </>
+      )}
+    </header>
+  );
 };
 
 MainHeader.propTypes = {
-    user: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-    }),
-    onUpdateUser: PropTypes.func.isRequired, // Fonction pour mettre à jour l'utilisateur
+  onUpdateUser: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired, // Ajout de la prop `isEditing`
+  onCloseModal: PropTypes.func.isRequired, // Ajout de la prop pour fermer la modale
 };
 
 export default MainHeader;

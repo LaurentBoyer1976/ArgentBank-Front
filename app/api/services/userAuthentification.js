@@ -39,3 +39,25 @@ export const fetchUserProfile = async () => {
     throw error;
   }
 };
+
+export const updateUserName = async (token, firstName, lastName) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/v1/user/profile`, {
+      method: 'PUT', // Utilisez la méthode HTTP PUT pour mettre à jour les données
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ firstName, lastName }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update user profile');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    throw error;
+  }
+};
