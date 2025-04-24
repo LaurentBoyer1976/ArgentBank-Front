@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainHeader from "../components/mainHeader";
 import Account from "../components/account";
@@ -10,11 +10,11 @@ const User = () => {
   const user = useSelector((state) => state.user);
   const accounts = useSelector((state) => state.accounts);
 
-  // Log les données utilisateur et les comptes
+  const [isEditing, setIsEditing] = useState(false); // État pour contrôler la modale
+
   console.log("User data from Redux:", user);
   console.log("Accounts data from Redux:", accounts);
 
-  // Déclenche la récupération des comptes si nécessaire
   useEffect(() => {
     if (accounts.status === "idle") {
       console.log("Dispatching fetchUserAccounts...");
@@ -40,13 +40,17 @@ const User = () => {
     return <p>Error loading accounts: {accounts.error}</p>;
   }
 
-  // Formate les données des comptes avant de les transmettre
   const formattedAccounts = formatAccounts(accounts.accounts);
-console.log("Formatted accounts:", formattedAccounts);
+  console.log("Formatted accounts:", formattedAccounts);
+
   return (
     <main className="main bg-dark">
-      <MainHeader onUpdateUser={(updatedUser) => console.log("Updated user:", updatedUser)} />
-      <Account accounts={formattedAccounts} /> {/* Passe les comptes formatés */}
+      <MainHeader
+        onUpdateUser={() => setIsEditing(true)} // Ouvre la modale
+        isEditing={isEditing} // Passe l'état de la modale
+        onCloseModal={() => setIsEditing(false)} // Ferme la modale
+      />
+      <Account accounts={formattedAccounts} />
     </main>
   );
 };
