@@ -15,7 +15,7 @@ const LoginModal = () => {
     e.preventDefault();
     try {
       const token = await loginUser(email, password); // Appel API pour se connecter
-      console.log("Token after login:", token);
+
       dispatch(setToken(token)); // Stocker le token dans le store
       localStorage.setItem("token", token); // Stocker le token dans localStorage
 

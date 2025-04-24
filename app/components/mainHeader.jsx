@@ -7,7 +7,6 @@ import EditUserNameModal from "./editUserNameModal"; // Import de la modale
 const MainHeader = ({ onUpdateUser, isEditing, onCloseModal }) => {
   const user = useSelector((state) => state.user);
 
-  console.log("User data in MainHeader:", user);
 
   if (!user.firstName || !user.name) {
     return <p>Loading user data...</p>;
