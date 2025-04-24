@@ -6,16 +6,12 @@ import argentBankLogo from "../assets/img/argentBankLogo.png";
 
 const NavBar = ({ onSignOut }) => {
   const { firstName, status, error } = useSelector((state) => state.user);
-  console.log("User state in NavBar:", useSelector((state) => state.user));
-
   if (status === "loading") {
     return <p>Loading...</p>;
   }
-
   if (status === "failed") {
     return <p>Error: {error}</p>;
   }
-
   return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
@@ -44,9 +40,7 @@ const NavBar = ({ onSignOut }) => {
     </nav>
   );
 };
-
 NavBar.propTypes = {
   onSignOut: PropTypes.func.isRequired,
 };
-
 export default NavBar;

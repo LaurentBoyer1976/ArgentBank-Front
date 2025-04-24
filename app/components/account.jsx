@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import AccountCard from "./accountCard";
-import { fetchAccounts } from "../api/services/api";
 
-const Account = () => {
-  const [accounts, setAccounts] = useState([]); // État pour stocker les comptes
-  const [error, setError] = useState(""); // État pour gérer les erreurs
-
-  useEffect(() => {
-    const getAccounts = async () => {
-      try {
-        const response = await fetchAccounts(); // Récupère les comptes via l'API
-        setAccounts(response.body); // Stocke les comptes dans l'état
-      } catch (err) {
-        setError("Failed to load accounts. Please try again later.");
-      }
-    };
-
-    getAccounts();
-  }, []);
+const Account = ({ accounts }) => {
+  console.log("Accounts passed to AccountCard:", accounts);
 
   return (
     <>
       <h2 className="sr-only">Accounts</h2>
-      {error && <p className="error-message">{error}</p>}
       {accounts.map((data) => (
         <AccountCard
-          key={data._id} // Utilisez `_id` comme clé unique
+          key={data.id}
           title={data.title}
           amount={data.amount}
           description={data.description}
@@ -33,6 +18,17 @@ const Account = () => {
       ))}
     </>
   );
+};
+
+Account.propTypes = {
+  accounts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      amount: PropTypes.string.isRequired, // Ou `PropTypes.number` selon le format
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Account;

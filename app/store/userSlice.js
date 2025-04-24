@@ -43,10 +43,10 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
-        console.log("User data fetched:", action.payload);
+        console.log("User data updated in Redux Store:", action.payload); // Log des données utilisateur
         state.status = "succeeded";
         state.firstName = action.payload.firstName;
-        state.name = action.payload.lastName;
+        state.name = action.payload.lastName; // Vérifiez que `lastName` est bien défini
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.status = "failed";
