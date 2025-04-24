@@ -20,7 +20,7 @@ const Header = () => {
         // Réinitialisez l'état utilisateur
         setUser(null);
         // Redirigez vers la page d'accueil ou de connexion
-        window.location.href = "/home";
+        window.location.href = "/";
     };
 
     return (
