@@ -206,6 +206,17 @@ header .sign-in-content{
   padding: 5px;
   font-size: 1.2rem;
 }
+.inactivity-modal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 300px;
+  margin: 20px auto;
+  padding: 2rem;
+  border-radius: 10px;
+}
 
 .footer {
   display: flex;

@@ -1,7 +1,7 @@
 export const formatAccounts = (accounts) => {
 
   const formatted = accounts.map((account) => ({
-    id: account._id,
+    _id: account._id,
     title: account.title,
     amount: account.amount, // Si nécessaire, convertir ici en nombre ou conserver en chaîne
     description: account.description,
