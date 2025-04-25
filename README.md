@@ -97,6 +97,10 @@ Cette documentation inclut :
 - **Endpoints pour la gestion des comptes et des transactions** :
   - Récupération des comptes (`GET /accounts`)
   - Détails d'un compte (`GET /accounts/{accountId}`)
+  - Transactions d'un compte avec filtrage par date (`GET /accounts/{accountId}/transactions`)
+      Paramètres de requête :
+         startDate (optionnel) : Date de début pour filtrer les transactions (ex. 2025-04-01).
+         endDate (optionnel) : Date de fin pour filtrer les transactions (ex. 2025-04-30).
   - Détails d'une transaction (`GET /accounts/{accountId}/{transactionId}`)
   - Gestion des notes de transaction (création, modification, suppression) :
     - `POST /accounts/{accountId}/{transactionId}/note`
