@@ -80,6 +80,34 @@ L'application communique avec l'API backend suivante : [Argent Bank API](https:/
 
 Assurez-vous que l'API backend est configurée et en cours d'exécution avant de lancer le frontend.
 
+### Documentation Swagger
+
+Le backend expose une documentation Swagger pour faciliter l'exploration des endpoints disponibles. Une fois le backend démarré, vous pouvez accéder à la documentation Swagger à l'adresse suivante :
+
+[http://localhost:3001/api-docs](http://localhost:3001/api-docs)
+
+Cette documentation inclut :
+
+- **Endpoints pour la gestion des utilisateurs** :
+  - Connexion (`POST /user/login`)
+  - Inscription (`POST /user/signup`)
+  - Récupération et mise à jour du profil utilisateur (`POST /user/profile`, `PUT /user/profile`)
+  - Vérification du mot de passe utilisateur (`POST /user/verify-password`)
+
+- **Endpoints pour la gestion des comptes et des transactions** :
+  - Récupération des comptes (`GET /accounts`)
+  - Détails d'un compte (`GET /accounts/{accountId}`)
+  - Détails d'une transaction (`GET /accounts/{accountId}/{transactionId}`)
+  - Gestion des notes de transaction (création, modification, suppression) :
+    - `POST /accounts/{accountId}/{transactionId}/note`
+    - `PUT /accounts/{accountId}/{transactionId}/note`
+    - `DELETE /accounts/{accountId}/{transactionId}/note`
+
+- **Détails supplémentaires** :
+  - Les paramètres requis pour chaque endpoint.
+  - Les réponses attendues (codes HTTP, corps de réponse).
+  - Les erreurs possibles et leurs descriptions.
+
 ---
 
 ## Contribution
