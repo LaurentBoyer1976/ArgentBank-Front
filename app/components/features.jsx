@@ -2,6 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import FeatureItem from "./featureItem";
 
+/** 
+ * @description Composant Features qui affiche une liste de fonctionnalités
+ * @param {Array} datas - Liste des données des fonctionnalités
+ * @param {string} datas[].icon - L'icône de la fonctionnalité
+ * @param {string} datas[].title - Le titre de la fonctionnalité
+ * @param {string} datas[].description - La description de la fonctionnalité
+ * @param {number} datas[].id - L'identifiant de la fonctionnalité
+ * @returns {JSX.Element} - Le composant Features
+ */
+
 const Features = ({ datas }) => {
   return (
     <section className="features">

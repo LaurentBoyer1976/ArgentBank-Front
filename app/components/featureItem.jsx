@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * @description Composant FeatureItem qui affiche les informations d'une fonctionnalité
+ * @param {string} icon - L'icône de la fonctionnalité
+ * @param {string} title - Le titre de la fonctionnalité
+ * @param {string} description - La description de la fonctionnalité
+ * @returns {JSX.Element} - Le composant FeatureItem 
+ */
+
 const FeatureItem = ({ icon, title, description }) => {
-  // Construisez le chemin complet pour les icônes
+
   const iconPath = icon ? `/app/assets/img/${icon}` : ""; // Vérifiez que `icon` n'est pas vide
 
   return (

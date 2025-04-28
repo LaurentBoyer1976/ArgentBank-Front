@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import argentBankLogo from "../assets/img/argentBankLogo.png";
 
+/**
+ * @description Composant NavBar qui affiche la barre de navigation principale de l'application.
+ * @param {function} onSignOut - Fonction appelée lors de la déconnexion de l'utilisateur
+ * @returns {JSX.Element} - Le composant NavBar 
+ */
+
 const NavBar = ({ onSignOut }) => {
   const { firstName, status, error } = useSelector((state) => state.user);
   if (status === "loading") {

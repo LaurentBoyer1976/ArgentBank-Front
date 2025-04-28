@@ -4,6 +4,12 @@ import { useDispatch } from "react-redux";
 import { setToken, fetchUserData } from "../store/userSlice";
 import { loginUser } from "../api/services/userAuthentification";
 
+/**
+ * @description Composant LoginModal qui affiche le formulaire de connexion
+ * @param {function} onSignIn - Fonction appelée lorsque l'utilisateur se connecte
+ * @returns {JSX.Element} - Le composant LoginModal
+ */
+
 const LoginModal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,15 +20,15 @@ const LoginModal = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const token = await loginUser(email, password); // Appel API pour se connecter
+      const token = await loginUser(email, password); // Info: Appel API pour se connecter
 
-      dispatch(setToken(token)); // Stocker le token dans le store
-      localStorage.setItem("token", token); // Stocker le token dans localStorage
+      dispatch(setToken(token)); // Info: Stock le token dans le store
+      localStorage.setItem("token", token); // Info: Stock le token dans localStorage
 
-      // Récupérer les données utilisateur et les stocker dans le store
+      //Note: Récupère les données utilisateur et les stock dans le store
       await dispatch(fetchUserData());
 
-      navigate('/user'); // Rediriger vers la page utilisateur
+      navigate('/user'); // Note: Redirige vers la page utilisateur
     } catch (err) {
       setError(err.message);
     }

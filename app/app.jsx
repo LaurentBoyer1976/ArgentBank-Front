@@ -13,9 +13,4 @@ root.render(
       <AppRouter />
     </React.StrictMode>
   </Provider>
-);/*
-root.render(
-  <React.StrictMode>
-    <AppRouter />
-  </React.StrictMode>
-);*/
+);

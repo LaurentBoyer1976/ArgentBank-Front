@@ -4,6 +4,12 @@ import { updateUserName } from "../api/services/userAuthentification";
 import { fetchUserData } from "../store/userSlice";
 import PropTypes from "prop-types";
 
+/** 
+ * @description Composant EditUserNameModal qui affiche un formulaire pour modifier le nom d'utilisateur
+ * @param {Function} onClose - Fonction pour fermer la modale
+ * @returns {JSX.Element} - Le composant EditUserNameModal
+ */
+
 const EditUserNameModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const { firstName, name, token } = useSelector((state) => state.user);

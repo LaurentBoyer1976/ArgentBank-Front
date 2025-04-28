@@ -7,11 +7,11 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const handleSignOut = () => {
-        // Supprimez le token JWT du localStorage
+        //Note: Supprime le token JWT du localStorage
         localStorage.removeItem("token");
-        // Réinitialisez l'état utilisateur dans Redux
+        //Note: Réinitialise l'état utilisateur dans Redux
         dispatch(clearUser());
-        // Redirigez vers la page d'accueil ou de connexion
+        //Note: Redirige vers la page d'accueil ou de connexion
         window.location.href = "/";
     };
 

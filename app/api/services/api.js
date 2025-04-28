@@ -1,5 +1,12 @@
 import {BASE_URL} from "../constants/baseUrl.js";
 
+/**
+ * @description Fonction pour récupérer les données de l'API
+ * @param {string} endpoint - L'endpoint de l'API à appeler
+ * @returns {Promise<any>} - Les données récupérées de l'API
+ * @throws {Error} - Si une erreur se produit lors de la récupération des données
+ */
+
 const fetchApiData = async (endpoint) => {
   try {
     const token = localStorage.getItem('token'); // Récupère le token JWT depuis le localStorage
@@ -20,15 +27,11 @@ const fetchApiData = async (endpoint) => {
   }
 };
 
-export const fetchUsers = async () => {
-  try {
-    const users = await fetchApiData("api/v1/user/all"); // Endpoint mis à jour
-    return users;
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
-};
+
+/**
+ * @description Fonction pour récupérer les données du profil de l'utilisateur
+ * @returns {Promise<Object>} - Les données du profil de l'utilisateur
+ */
 
 export const fetchFeatures = async () => {
   try {
@@ -42,6 +45,11 @@ export const fetchFeatures = async () => {
     return [];
   }
 };
+
+/**
+ * @description Fonction pour récupérer les comptes associés au profil de l'utilisateur
+ * @returns {Promise<Object>} - Les données des comptes associés au profil de l'utilisateur
+ */
 
 export const fetchAccounts = async () => {
   try {

@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * @description Composant AccountCard qui affiche les informations d'un compte
+ * @param {title: string, amount: string, description: string} props - Les props du composant
+ * @returns {JSX.Element} le composant AccountCard
+ */
+
 const AccountCard = ({ title, amount, description }) => {
 
   return (
@@ -19,7 +25,7 @@ const AccountCard = ({ title, amount, description }) => {
 
 AccountCard.propTypes = {
   title: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired, // Ou `PropTypes.number` selon le format
+  amount: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 

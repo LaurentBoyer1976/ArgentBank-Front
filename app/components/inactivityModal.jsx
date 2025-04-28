@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * @description Composant InactivityModal qui affiche une modal d'inactivité
+ * @param {function} onStayConnected - Fonction appelée lorsque l'utilisateur choisit de rester connecté
+ * @param {function} onSignOut - Fonction appelée lorsque l'utilisateur choisit de se déconnecter
+ * @returns {JSX.Element} - Le composant InactivityModal
+ */
+
 const InactivityModal = ({ onStayConnected, onSignOut }) => {
   return (
     <div className="inactivity-modal">

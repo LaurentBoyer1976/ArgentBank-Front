@@ -2,7 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import UserName from "./userName";
-import EditUserNameModal from "./editUserNameModal"; // Import de la modale
+import EditUserNameModal from "./editUserNameModal"; 
+
+/**
+ * @description Composant MainHeader qui affiche l'en-tête secondaire de l'application dans la balise main.
+ * @param {function} onUpdateUser - Fonction appelée pour mettre à jour l'utilisateur
+ * @param {boolean} isEditing - Indique si l'utilisateur est en mode édition
+ * @param {function} onCloseModal - Fonction appelée pour fermer la modale
+ * @returns {JSX.Element} - Le composant MainHeader
+ */
 
 const MainHeader = ({ onUpdateUser, isEditing, onCloseModal }) => {
   const user = useSelector((state) => state.user);
@@ -15,7 +23,7 @@ const MainHeader = ({ onUpdateUser, isEditing, onCloseModal }) => {
   return (
     <header className="header">
       {isEditing ? (
-        <EditUserNameModal onClose={onCloseModal} /> // Affiche la modale si `isEditing` est vrai
+        <EditUserNameModal onClose={onCloseModal} /> // Info: Affiche la modale si `isEditing` est vrai
       ) : (
         <>
           <h1>Welcome back</h1>
@@ -31,8 +39,8 @@ const MainHeader = ({ onUpdateUser, isEditing, onCloseModal }) => {
 
 MainHeader.propTypes = {
   onUpdateUser: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool.isRequired, // Ajout de la prop `isEditing`
-  onCloseModal: PropTypes.func.isRequired, // Ajout de la prop pour fermer la modale
+  isEditing: PropTypes.bool.isRequired, 
+  onCloseModal: PropTypes.func.isRequired, 
 };
 
 export default MainHeader;

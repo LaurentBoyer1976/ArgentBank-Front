@@ -2,6 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import AccountCard from "./accountCard";
 
+/**
+ * @description Composant Account qui affiche une liste de cartes de compte
+ * @param {Object} accounts - Les datas à passer au composant
+ * @param {Array} accounts.accounts - Les données des comptes à afficher
+ * @returns {JSX.Element} - Le composant Account
+ */
+
 const Account = ({ accounts }) => {
   console.log("Account component rendered with accounts:", accounts);
   return (
@@ -24,7 +31,7 @@ Account.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired, // Ou `PropTypes.number` selon le format
+      amount: PropTypes.string.isRequired, 
       description: PropTypes.string.isRequired,
     })
   ).isRequired,

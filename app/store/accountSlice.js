@@ -3,28 +3,37 @@ import { fetchAccounts } from "../api/services/api";
 
 const initialState = {
   accounts: [],
-  status: "idle", // idle | loading | succeeded | failed
+  status: "idle", //Info: idle | loading | succeeded | failed
   error: null,
 };
 
-// Action asynchrone pour récupérer les comptes utilisateur
+
+/**
+ * @description Action asynchrone pour récupérer les comptes utilisateur
+ * @param {string} token - Le token d'authentification de l'utilisateur
+ */
 export const fetchUserAccounts = createAsyncThunk(
   "accounts/fetchUserAccounts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetchAccounts(); // Appel de l'API
+      const response = await fetchAccounts(); //Info: Appel de l'API
       return response.body.map((account) => ({
-        id: account._id, // Renomme `_id` en `id`
+        id: account._id, //Info: Renomme `_id` en `id`
         title: account.title,
         amount: account.amount,
         description: account.description,
       }));
     } catch (error) {
-      console.error("Error fetching accounts:", error); // Log des erreurs
+      console.error("Error fetching accounts:", error); //Note: Log des erreurs
       return rejectWithValue(error.message);
     }
   }
 );
+
+/**
+ * @description Slice Redux pour gérer l'état des comptes utilisateur
+ * @returns {object} - Le slice Redux
+ */
 
 const accountSlice = createSlice({
   name: "accounts",

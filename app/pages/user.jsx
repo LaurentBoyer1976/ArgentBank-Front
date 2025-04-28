@@ -7,12 +7,23 @@ import { formatAccounts } from "../utils/formatData";
 import { openEditModal, closeEditModal, clearUser } from "../store/userSlice";
 import InactivityModal from "../components/inactivityModal";
 
+
+/**
+ * @description Composant User qui affiche les informations de l'utilisateur et ses comptes
+* @returns {JSX.Element} - Le composant User
+ */
+
 const User = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const accounts = useSelector((state) => state.accounts);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const inactivityTimer = useRef(null); // Utilisation de useRef pour le timer
+  const inactivityTimer = useRef(null); //Note:  Utilisation de useRef pour le timer
+
+  /**
+   * @description Fonction pour réinitialiser le timer d'inactivité
+   * @returns {void}
+   */
 
   const resetInactivityTimer = useCallback(() => {
     if (inactivityTimer.current) {
@@ -20,7 +31,7 @@ const User = () => {
     }
     inactivityTimer.current = setTimeout(() => {
       setIsModalVisible(true);
-    }, 300000); // 5 minutes d'inactivité
+    }, 300000); //Note: 5 minutes d'inactivité
   }, []);
 
   useEffect(() => {
@@ -28,17 +39,17 @@ const User = () => {
       dispatch(fetchUserAccounts());
     }
 
-    // Ajouter des écouteurs pour détecter l'activité
+    // Info: Ajoute des écouteurs pour détecter l'activité
     const events = ["mousemove", "keydown", "click"];
     events.forEach((event) =>
       window.addEventListener(event, resetInactivityTimer)
     );
 
-    // Initialiser le timer
+    //Info: Initialiser le timer
     resetInactivityTimer();
 
     return () => {
-      // Nettoyer les écouteurs et le timer
+      // Note: Nettoie les écouteurs et le timer
       events.forEach((event) =>
         window.removeEventListener(event, resetInactivityTimer)
       );

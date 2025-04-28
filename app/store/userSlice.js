@@ -5,22 +5,33 @@ const initialState = {
   firstName: null,
   name: null,
   token: null,
-  status: "idle", // idle | loading | succeeded | failed
+  status: "idle", //Info: idle | loading | succeeded | failed
   error: null,
 };
 
-// Action asynchrone pour récupérer les données utilisateur
+/**
+ * @description Slice Redux pour gérer l'état de l'utilisateur
+ * @info Le slice contient les informations de l'utilisateur, le token et l'état de la requête.
+ * @returns {object} - Le slice Redux
+ */
+
 export const fetchUserData = createAsyncThunk(
   "user/fetchUserData",
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetchUserProfile();
-      return response.body; // Retourne les données utilisateur (firstName, lastName)
+      return response.body; //Note: Retourne les données utilisateur (firstName, lastName)
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+/** 
+ * @description Slice Redux pour gérer l'état de l'utilisateur
+ * @info Le slice contient les informations de l'utilisateur, le token et l'état de la requête.
+ * @returns {object} - Le slice Redux
+ */
 
 const userSlice = createSlice({
   name: "user",
@@ -37,10 +48,10 @@ const userSlice = createSlice({
       state.error = null;
     },
     openEditModal: (state) => {
-      state.isEditing = true; // Ouvre la modale d'édition
+      state.isEditing = true; //Info: Ouvre la modale d'édition
     },
     closeEditModal: (state) => {
-      state.isEditing = false; // Ferme la modale d'édition
+      state.isEditing = false; //Info: Ferme la modale d'édition
     },
   },
   extraReducers: (builder) => {
@@ -51,7 +62,7 @@ const userSlice = createSlice({
       .addCase(fetchUserData.fulfilled, (state, action) => {       
         state.status = "succeeded";
         state.firstName = action.payload.firstName;
-        state.name = action.payload.lastName; // Vérifiez que `lastName` est bien défini
+        state.name = action.payload.lastName; //Info:Vérifiez que `lastName` est bien défini
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.status = "failed";
