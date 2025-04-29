@@ -18,7 +18,7 @@ export const fetchUserAccounts = createAsyncThunk(
     try {
       const response = await fetchAccounts(); //Info: Appel de l'API
       return response.body.map((account) => ({
-        id: account._id, //Info: Renomme `_id` en `id`
+        _id: account._id,
         title: account.title,
         amount: account.amount,
         description: account.description,

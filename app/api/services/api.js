@@ -53,7 +53,8 @@ export const fetchFeatures = async () => {
 
 export const fetchAccounts = async () => {
   try {
-    const accounts = await fetchApiData("api/v1/user/accounts"); // Endpoint mis à jour
+    const accounts = await fetchApiData("api/v1/user/accounts");
+    console.log("Accounts fetched from API:", accounts); // Info: Log des comptes récupérés
     return accounts;
   } catch (error) {
     console.error("Error fetching accounts:", error);

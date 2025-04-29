@@ -10,13 +10,14 @@ import AccountCard from "./accountCard";
  */
 
 const Account = ({ accounts }) => {
-  console.log("Account component rendered with accounts:", accounts);
+
   return (
     <>
       <h2 className="sr-only">Accounts</h2>
       {accounts.map((data) => (
         <AccountCard
-          key={data._id}
+          key={data._id} // Utilise `data.id` comme clé
+          _id={data._id} // Passe `id` comme prop
           title={data.title}
           amount={data.amount}
           description={data.description}
@@ -29,9 +30,9 @@ const Account = ({ accounts }) => {
 Account.propTypes = {
   accounts: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired, 
       title: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired, 
+      amount: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
     })
   ).isRequired,

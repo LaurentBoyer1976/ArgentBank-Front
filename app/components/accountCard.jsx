@@ -7,10 +7,10 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} le composant AccountCard
  */
 
-const AccountCard = ({ title, amount, description }) => {
+const AccountCard = ({ _id, title, amount, description}) => {
 
   return (
-    <section className="account">
+    <section className="account" key={_id}>
       <div className="account-content-wrapper">
         <h3 className="account-title">{title}</h3>
         <p className="account-amount">{amount}</p> {/* Affiche directement la chaîne ou le nombre */}
@@ -24,6 +24,7 @@ const AccountCard = ({ title, amount, description }) => {
 };
 
 AccountCard.propTypes = {
+  _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
