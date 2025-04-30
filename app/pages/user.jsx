@@ -31,7 +31,7 @@ const User = () => {
     }
     inactivityTimer.current = setTimeout(() => {
       setIsModalVisible(true);
-    }, 300000); //Note: 5 minutes d'inactivité
+    }, 30000); //Note: 5 minutes d'inactivité
   }, []);
 
   useEffect(() => {

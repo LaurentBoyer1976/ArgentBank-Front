@@ -32,7 +32,7 @@ const NavBar = ({ onSignOut }) => {
               {firstName}
             </Link>
             <a className="main-nav-item" onClick={onSignOut}>
-              <i className="fa fa-sign-out"></i>
+              <i className="sign-out"></i>
               Sign Out
             </a>
           </>
