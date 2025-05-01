@@ -53,7 +53,7 @@ Voici un aperçu de la structure des fichiers principaux :
 ```
 ArgentBank-Front/
 ├── public/               # Fichiers statiques
-├── src/
+├── app/
 │   ├── components/       # Composants React réutilisables
 │   ├── pages/            # Pages principales de l'application
 │   ├── store/            # Gestion de l'état avec Redux Toolkit
