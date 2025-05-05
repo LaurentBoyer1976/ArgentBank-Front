@@ -10,9 +10,8 @@ const initialState = {
 };
 
 /**
- * @description Slice Redux pour gérer l'état de l'utilisateur
- * @info Le slice contient les informations de l'utilisateur, le token et l'état de la requête.
- * @returns {object} - Le slice Redux
+ * @description Thunk pour récupérer les données utilisateur
+ * @returns {Promise} - Une promesse qui résout les données utilisateur
  */
 
 export const fetchUserData = createAsyncThunk(
